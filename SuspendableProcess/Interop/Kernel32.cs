@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 #pragma warning disable SA1307 // Accessible fields must begin with upper-case letter
 namespace SuspendableProcess.Interop
 {
+    // This file contains code from https://www.codeproject.com/Articles/230005/%2FArticles%2F230005%2FLaunch-a-process-suspended which is used in accordance with the CPOLicense
+    // This file also contains code from https://www.pinvoke.net/index.aspx. The license for this is unknown, but the PInvoke.net homepage encourages copy/pasting.
     public class Kernel32
     {
         private const uint STARTF_USESHOWWINDOW = 0x00000001;
