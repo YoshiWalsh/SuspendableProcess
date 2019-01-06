@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuspendableProcess", "SuspendableProcess\SuspendableProcess.csproj", "{6E34A6CE-00AB-489D-9016-4EAF96EE05B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuspendableProcess.Sample", "SuspendableProcess.Sample\SuspendableProcess.Sample.csproj", "{8CF5909F-AA28-4E3B-BE36-C926CD89CCFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E34A6CE-00AB-489D-9016-4EAF96EE05B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E34A6CE-00AB-489D-9016-4EAF96EE05B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E34A6CE-00AB-489D-9016-4EAF96EE05B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E34A6CE-00AB-489D-9016-4EAF96EE05B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF5909F-AA28-4E3B-BE36-C926CD89CCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF5909F-AA28-4E3B-BE36-C926CD89CCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF5909F-AA28-4E3B-BE36-C926CD89CCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF5909F-AA28-4E3B-BE36-C926CD89CCFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E516E15-C66C-43D6-AB9F-B59BA1339B5B}
+	EndGlobalSection
+EndGlobal
