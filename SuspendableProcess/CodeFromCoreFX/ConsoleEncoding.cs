@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace SuspendableProcess.CodeFromCoreFX
 {
+    // This code is taken from the .NET CoreFX project (https://github.com/dotnet/corefx) and is used in accordance with the MIT License. See the LICENSE.MD document in this directory for more details.
+
     // StreamWriter calls Encoding.GetPreamble() to write the initial bits to the stream.
     // In case of Console we do not want to write the preamble as the user does not expect these bits.
     // In desktop this is handled by setting an internal property on the StreamWriter HasPreambleBeenWritten = true

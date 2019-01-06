@@ -8,6 +8,8 @@ using Vanara.PInvoke;
 
 namespace SuspendableProcess.CodeFromCoreFX
 {
+    // This code is taken from the .NET CoreFX project (https://github.com/dotnet/corefx) and is used in accordance with the MIT License. See the LICENSE.MD document in this directory for more details.
+
     internal sealed class DecoderDBCS : Decoder
     {
         private readonly Encoding _encoding;
