@@ -166,8 +166,6 @@ namespace SuspendableProcess
                     childInputPipeHandle?.Dispose();
                     childOutputPipeHandle?.Dispose();
                     childErrorPipeHandle?.Dispose();
-
-                    threadSH?.Dispose();
                 }
             }
 
