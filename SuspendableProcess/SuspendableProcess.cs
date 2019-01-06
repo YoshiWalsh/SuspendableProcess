@@ -25,6 +25,7 @@ namespace SuspendableProcess
         private const uint ERROR_EXE_MACHINE_TYPE_MISMATCH = 0xd8;
 
         private static object createProcessLock = new object();
+
         public bool StartSuspended()
         {
             var startInfo = this.StartInfo;
@@ -37,9 +38,6 @@ namespace SuspendableProcess
             };
 
             var argumentsBuilder = new StringBuilder(startInfo.Arguments);
-
-            Kernel32.SafeHPROCESS procSH = null;
-            Kernel32.SafeHTHREAD threadSH = null;
 
             Kernel32.SafeHFILE parentInputPipeHandle = null;
             Kernel32.SafeHFILE childInputPipeHandle = null;
@@ -154,11 +152,11 @@ namespace SuspendableProcess
 
                     if (!processInfo.hProcess.IsNull && !processInfo.hProcess.IsInvalid)
                     {
-                        procSH = processInfo.hProcess;
+                        processHandle = processInfo.hProcess;
                     }
                     if (!processInfo.hThread.IsNull && !processInfo.hThread.IsInvalid)
                     {
-                        threadSH = processInfo.hThread;
+                        threadHandle = processInfo.hThread;
                     }
                 }
                 finally
@@ -175,33 +173,31 @@ namespace SuspendableProcess
             if (startInfo.RedirectStandardInput)
             {
                 Encoding enc = GetEncoding((int)Kernel32.GetConsoleCP());
-                standardInput = new StreamWriter(new FileStream(SafeHFILEToSafeFileHandle(parentInputPipeHandle, true), FileAccess.Write, 4096, false), enc, 4096);
+                standardInput = new StreamWriter(new FileStream(SafeHFILEToSafeFileHandle(parentInputPipeHandle, false), FileAccess.Write, 4096, false), enc, 4096);
                 standardInput.AutoFlush = true;
                 this.GetType().BaseType.GetField("standardInput", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, standardInput);
             }
             if (startInfo.RedirectStandardOutput)
             {
                 Encoding enc = GetEncoding((int)Kernel32.GetConsoleOutputCP());
-                standardOutput = new StreamReader(new FileStream(SafeHFILEToSafeFileHandle(parentOutputPipeHandle, true), FileAccess.Read, 4096, false), enc, true, 4096);
+                standardOutput = new StreamReader(new FileStream(SafeHFILEToSafeFileHandle(parentOutputPipeHandle, false), FileAccess.Read, 4096, false), enc, true, 4096);
                 this.GetType().BaseType.GetField("standardOutput", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, standardOutput);
             }
             if (startInfo.RedirectStandardError)
             {
                 Encoding enc = GetEncoding((int)Kernel32.GetConsoleOutputCP());
-                standardError = new StreamReader(new FileStream(SafeHFILEToSafeFileHandle(parentErrorPipeHandle, true), FileAccess.Read, 4096, false), enc, true, 4096);
+                standardError = new StreamReader(new FileStream(SafeHFILEToSafeFileHandle(parentErrorPipeHandle, false), FileAccess.Read, 4096, false), enc, true, 4096);
                 this.GetType().BaseType.GetField("standardError", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, standardError);
             }
 
-            if (procSH == null)
+            if (processHandle == null)
             {
                 return false;
             }
 
-            this.GetType().BaseType.GetMethod("SetProcessHandle", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(this, new object[] { SafeHPROCESSToSafeProcessHandle(procSH, true) });
+            this.GetType().BaseType.GetMethod("SetProcessHandle", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(this, new object[] { SafeHPROCESSToSafeProcessHandle(processHandle, false) });
             this.GetType().BaseType.GetMethod("SetProcessId", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(this, new object[] { (int)processInfo.dwProcessId });
-
-            processHandle = processInfo.hProcess;
-            threadHandle = processInfo.hThread;
+            
             processId = (int)processInfo.dwProcessId;
 
             return true;

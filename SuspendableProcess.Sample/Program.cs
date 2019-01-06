@@ -28,8 +28,6 @@ namespace SuspendableProcess.Sample
             proc.StartSuspended();
             proc.Resume();
             proc.BeginOutputReadLine();
-            //var text = proc.StandardOutput.ReadToEnd();
-            //Console.WriteLine(text);
             proc.WaitForExit();
             Console.ReadKey();
         }
